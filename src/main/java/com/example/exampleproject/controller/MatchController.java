@@ -25,10 +25,10 @@ public class MatchController {
     private final MatchService matchService;
 
     @GetMapping(produces = "application/json")
-    public List<MatchDto> getMatches(@Positive @RequestParam Long leagueId,
-                                     @Positive @RequestParam Long homeTeamId,
-                                     @Positive @RequestParam Long awayTeamId,
-                                     @Positive @RequestParam Integer season,
+    public List<MatchDto> getMatches(@Positive @RequestParam(required = false) Long leagueId,
+                                     @Positive @RequestParam(required = false) Long homeTeamId,
+                                     @Positive @RequestParam(required = false) Long awayTeamId,
+                                     @Positive @RequestParam(required = false) Integer season,
                                      @PositiveOrZero @RequestParam @Min(0) int page) {
         if (leagueId == null && homeTeamId == null && awayTeamId == null && season == null) {
             List<Match> all = matchService.findAll(page);
